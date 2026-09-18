@@ -1,77 +1,74 @@
-# Liste des fonctionnalitée prévue
+# Périmètre fonctionnel
 
+## Comptes et accès
 
-## Compte
-Connexion / déconnexion
-Gestion du profil
-Gestion des rôles et permissions
+- Connexion et déconnexion.
+- Gestion du profil.
+- Gestion des utilisateurs, rôles et permissions.
+- Réinitialisation sécurisée de l'accès, selon la solution technique retenue.
 
+## Gestion des élèves
 
-## Élèves
-Ajouter / modifier / supprimer un élève
-Consulter sa fiche
-Affecter à une classe
-Consulter notes
-Consulter absences
-Consulter documents
+- Créer, modifier et supprimer un élève.
+- Consulter la fiche d'un élève.
+- Affecter un élève à une classe.
+- Consulter les notes, absences et documents autorisés.
 
-## Professeurs
-Ajouter / modifier / supprimer
-Consulter leur profil
-Affecter matières / classes
-Consulter leurs élèves
+## Gestion des professeurs
 
-## Classes
-Créer / modifier / supprimer une classe
-Ajouter / retirer des élèves
-Affecter des professeurs
-Groupe de classe
+- Créer, modifier et supprimer un professeur.
+- Consulter la fiche d'un professeur.
+- Affecter des matières et des classes.
+- Consulter les élèves des classes affectées.
+
+## Gestion des classes et matières
+
+- Créer, modifier et supprimer une classe.
+- Ajouter ou retirer des élèves d'une classe.
+- Affecter des professeurs à une classe.
+- Gérer les matières et, si nécessaire, les groupes de classe.
 
 ## Notes
-Créer une évaluation
-Saisir les notes
-Modifier une note
-Coefficient
-Calcul des moyennes
-Consultation des résultats
 
-## Absences / retards
-Déclarer une absence
-Déclarer un retard
-Justifier une absence
-Modifier / supprimer
-Historique
+- Créer une évaluation.
+- Saisir et modifier les notes.
+- Gérer les coefficients.
+- Calculer les moyennes.
+- Consulter les résultats selon les droits de l'utilisateur.
+
+## Absences et retards
+
+- Déclarer une absence ou un retard.
+- Justifier une absence.
+- Modifier ou supprimer une déclaration selon les droits.
+- Consulter l'historique.
 
 ## Documents
-Déposer un document
-Télécharger
-Supprimer
-Classer
-Associer à une classe / élève
+
+- Déposer, télécharger, classer et supprimer un document.
+- Associer un document à une classe, un élève ou une matière.
+- Limiter l'accès aux utilisateurs autorisés.
 
 ## Messagerie
-Élève ↔ professeur
-Élève → groupe classe
-Notifications de nouveaux messages
-Historique des conversations
-Temps réel
+
+- Échanges entre élève et professeur.
+- Diffusion à un groupe ou à une classe.
+- Historique des conversations.
+- Notifications, selon le périmètre retenu.
 
 ## Emploi du temps
-Créer un cours
-Associer professeur / classe / salle
-Consulter l'emploi du temps
+
+- Créer un cours.
+- Associer un cours à une classe, un professeur et une salle.
+- Consulter l'emploi du temps selon le rôle.
 
 ## Tableau de bord
-Moyenne
-Absences
-Prochains cours
-Messages
-Informations importantes
 
-## Administration
-Gestion des utilisateurs
-Gestion des rôles
-Gestion des classes
-Gestion des matières
-Gestion de l'année scolaire
-Journal des actions
+- Afficher les informations utiles au rôle connecté : moyenne, absences, prochains cours, messages et informations importantes.
+
+## Administration et suivi
+
+- Gérer les utilisateurs, rôles et permissions.
+- Gérer l'année scolaire et les paramètres de l'établissement.
+- Consulter des statistiques.
+- Consulter le journal des actions administratives.
