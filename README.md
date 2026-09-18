@@ -15,6 +15,7 @@ Proposer deux applications s'appuyant sur une API et une base de données commun
 - [Périmètre fonctionnel](Fonctionnalitée.md)
 - [Découpage des applications](Separation.md)
 - [Modèle conceptuel de données](MCD.md)
+- [Modèle logique et schéma SQL](MLD.md)
 
 ## État du projet
 
