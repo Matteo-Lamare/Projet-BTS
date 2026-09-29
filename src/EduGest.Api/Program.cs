@@ -1,5 +1,6 @@
 using System.Text;
 using EduGest.Infrastructure.Identity;
+using EduGest.Infrastructure.Authorization;
 using EduGest.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -29,7 +30,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ClockSkew = TimeSpan.FromSeconds(30)
         };
     });
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    foreach (var permission in Permissions.All)
+        options.AddPolicy(Permissions.Policy(permission), policy => policy.Requirements.Add(new PermissionRequirement(permission)));
+});
 
 var app = builder.Build();
 
