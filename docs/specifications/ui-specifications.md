@@ -2,64 +2,64 @@
 
 ## Principes ergonomiques communs
 
+- identité EduGest bleu/cyan avec thème clair et sombre ;
 - navigation stable et prévisible ;
-- intitulés en français compréhensibles ;
+- intitulés français compréhensibles ;
+- petites icônes fonctionnelles, sans surcharger les écrans ;
+- information prioritaire visuellement dominante ;
 - action principale clairement identifiable ;
-- confirmation avant une suppression importante ;
-- message explicite après succès ou erreur ;
-- formulaires avec libellés visibles et validation proche du champ ;
-- ne pas afficher une fonction interdite et toujours faire vérifier l'autorisation par l'API ;
-- limiter la quantité d'informations affichée à ce qui est utile au rôle.
+- confirmation avant suppression importante ;
+- messages explicites après succès/erreur ;
+- validation proche du champ ;
+- fonctions interdites masquées côté interface et toujours refusées côté API ;
+- quantité d'informations limitée à ce qui est utile au rôle.
+
+## Connexion commune
+
+La connexion ne demande **jamais de choisir un rôle**. L'utilisateur fournit ses identifiants ; après authentification, ses rôles/permissions déterminent l'espace et les fonctions accessibles.
+
+Le formulaire reste simple : identifiant/e-mail, mot de passe, bouton de connexion, erreur et chargement. Affichage/masquage du mot de passe possible. « Se souvenir de moi » et récupération de mot de passe ne seront conservés que si leur comportement est réellement implémenté.
 
 ## R1 — WPF
 
-### Écran Connexion
-Champs : identifiant, mot de passe. Actions : connexion, affichage d'erreur. Aucun mot de passe ne doit être journalisé ou affiché en clair après saisie.
-
 ### Tableau de bord
-Navigation vers Élèves, Professeurs, Classes, Matières, Scolarité et autres fonctions autorisées. Les éléments visibles dépendent du rôle.
+Navigation adaptée au compte connecté. Pour le professeur, priorité au planning, prochain cours/appel et actions à traiter. Pour l'administration/administrateur, priorité aux informations de gestion utiles.
 
-### Élèves
-Liste avec recherche simple ; action d'ajout ; sélection d'une fiche ; formulaire prénom, nom, date de naissance et informations de compte nécessaires. Accès aux inscriptions selon le périmètre.
+### Élèves et professeurs
+Listes avec recherche, fiches et opérations autorisées. Les affectations professeur relient professeur, classe et matière.
 
-### Professeurs
-Liste/recherche, création/modification et consultation des affectations.
-
-### Classes et matières
-Écrans simples de liste + formulaire. Une classe affiche son année scolaire. Les affectations permettent de choisir professeur, classe et matière.
+### Classes, matières & affectations
+Listes/formulaires simples. Une classe affiche son année scolaire. L'administration utilise le libellé « Matières & affectations » plutôt que « Notes » pour cette gestion structurelle.
 
 ### Évaluations et notes
-Sélection de l'affectation/classe, création d'une évaluation, puis tableau des élèves permettant la saisie des notes. Le barème doit être visible lors de la saisie.
+Le professeur sélectionne son affectation/classe et une évaluation puis saisit les notes. Barème visible. L'administration n'est pas présentée comme l'acteur principal de saisie des notes.
 
 ### Absences/retards
-Sélection d'une séance ou d'un élève selon le parcours retenu ; choix Absence/Retard ; date/heure ; motif facultatif.
+Le professeur peut effectuer l'appel dans le périmètre de ses séances/classes. Type, date/heure et informations complémentaires selon modèle final.
 
 ## R2 — Web responsive
 
-### Connexion
-Formulaire centré et utilisable sur écran mobile. Identifiant, mot de passe, message d'erreur et état de chargement.
+### Élève
+Dashboard centré sur planning, prochain cours et informations personnelles utiles. Accès à ses notes, absences, documents, planning et messagerie autorisée.
 
-### Navigation
-Desktop : navigation persistante si l'espace le permet. Mobile : navigation compacte. Seules les fonctions autorisées sont proposées.
+### Parent
+Consultation des enfants liés. Si plusieurs enfants : sélection de l'enfant. Accès lecture aux notes, absences, documents et planning. Pas de messagerie parent en V1.
 
-### Tableau de bord
-Résumé adapté au rôle : prochaines informations utiles, notes/assiduité et accès rapides. Ne pas surcharger la première version.
+### Professeur
+Si les fonctions professeur sont exposées en R2, elles reprennent les mêmes restrictions de périmètre que R1 et une interface adaptée au navigateur.
 
 ### Notes
-Liste lisible par matière/évaluation avec note et barème. Le parent choisit l'enfant lorsqu'il en suit plusieurs.
-
-### Absences et retards
-Historique chronologique avec type, date et justification/motif si le périmètre final le prévoit.
+Liste par matière/évaluation avec note et barème. Le parent consulte uniquement l'enfant sélectionné et lié à son compte.
 
 ### Emploi du temps
-Vue adaptée à la largeur disponible ; informations essentielles : date/heure, matière, professeur/classe selon le rôle et salle lorsqu'elle existe.
+Vue adaptée à la largeur disponible : date/heure, matière, professeur ou classe selon rôle, salle si disponible.
 
 ### Documents
-Liste avec titre/type/contexte et action de téléchargement autorisée.
+Liste avec titre/type/contexte et téléchargement autorisé.
 
 ### Messagerie
-Liste des conversations autorisées, historique et zone d'envoi. Aucune création de conversation privée élève↔élève.
+Élève ↔ professeur et diffusion de groupe selon droits. Pas de conversation privée élève↔élève. Pas de messagerie parent en V1.
 
-## Maquettes
+## Référence visuelle
 
-Ce document fixe les contenus et comportements attendus, mais ne remplace pas les maquettes visuelles. Les maquettes finales doivent être créées ou capturées au fur et à mesure du développement et conservées comme preuve de conception/ergonomie.
+Les décisions visuelles validées sont consignées dans `docs/design/mockups.md`. Les images servent de référence ergonomique ; l'application finale et ses captures constitueront la preuve du résultat réellement implémenté.
