@@ -14,7 +14,7 @@ Domain / Application / Infrastructure / API : séparation claire, testabilité e
 
 ## Clients
 
-R1 utilise WPF + MVVM pour une interface desktop riche. R2 utilise HTML/CSS/JavaScript vanilla afin de maîtriser directement HTTP, JSON et JavaScript sans ajouter un framework front-end.
+R1 utilise WPF + MVVM pour une interface desktop riche. R2 utilise HTML + Tailwind CSS + JavaScript vanilla : aucun framework JavaScript n'est ajouté, mais Tailwind fournit le système de styles responsive.
 
 ## Sécurité
 
@@ -61,3 +61,7 @@ Le soft delete est limité aux comptes, profils principaux et documents lorsque 
 Le projet utilise ASP.NET Core Identity pour les comptes d'authentification et les rôles techniques. Les profils métier `Student`, `Teacher` et `Parent` restent des entités du domaine et référencent l'identifiant du compte Identity. Les permissions fonctionnelles restent dans le modèle métier afin de pouvoir exprimer des droits plus fins que les seuls rôles.
 
 Conséquence : le `DbContext` d'Infrastructure sera basé sur `IdentityDbContext`, et les tables Identity seront la source de vérité pour les comptes, mots de passe et rôles. Les tables métier ne dupliquent pas ces données d'authentification.
+
+## ADR-13 — Tailwind CSS pour le client Web R2
+
+R2 utilise HTML, Tailwind CSS et JavaScript vanilla. Tailwind est compilé localement avec Node.js/npm via le CLI officiel ; le CSS produit est un fichier statique servi au navigateur. Le Play CDN n'est pas utilisé en production. Cette décision conserve un front-end simple et explicable tout en accélérant la réalisation d'une interface responsive et cohérente.

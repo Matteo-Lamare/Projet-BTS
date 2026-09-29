@@ -11,7 +11,7 @@ WPF (R1) et Web (R2) consomment la même API ASP.NET Core, qui est la seule port
 - EduGest.Infrastructure : EF Core, PostgreSQL, Identity, fichiers et journalisation.
 - EduGest.Api : contrôleurs REST, authentification, autorisation, middleware et SignalR.
 - EduGest.Desktop : client WPF en MVVM.
-- EduGest.Web : client HTML/CSS/JavaScript vanilla.
+- EduGest.Web : client HTML + Tailwind CSS + JavaScript vanilla. Tailwind est compilé lors du build front ; aucun runtime Tailwind ni CDN n'est requis en production.
 - Tests : xUnit unitaires et intégration API.
 
 Flux : Client → Controller → Application Service → Infrastructure/EF Core → PostgreSQL.
