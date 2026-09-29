@@ -23,7 +23,6 @@ public sealed class EduGestDbContext(DbContextOptions<EduGestDbContext> options)
     public DbSet<Session> Sessions => Set<Session>();
     public DbSet<AttendanceEvent> AttendanceEvents => Set<AttendanceEvent>();
     public DbSet<ParentStudent> ParentStudents => Set<ParentStudent>();
-    public DbSet<UserRole> UserRoles => Set<UserRole>();
     public DbSet<RolePermission> RolePermissions => Set<RolePermission>();
 
     protected override void OnModelCreating(ModelBuilder m)
@@ -152,12 +151,6 @@ public sealed class EduGestDbContext(DbContextOptions<EduGestDbContext> options)
             e.HasOne<Student>().WithMany().HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.Cascade);
         });
 
-        m.Entity<UserRole>(e =>
-        {
-            e.HasKey(x => new { x.UserId, x.RoleId });
-            e.HasOne<ApplicationUser>().WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
-            e.HasOne<ApplicationRole>().WithMany().HasForeignKey(x => x.RoleId).OnDelete(DeleteBehavior.Cascade);
-        });
 
         m.Entity<RolePermission>(e =>
         {
