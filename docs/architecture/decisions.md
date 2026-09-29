@@ -55,3 +55,9 @@ Parent est un rôle métier réel. La relation parent-enfant est une association
 ## Soft delete
 
 Le soft delete est limité aux comptes, profils principaux et documents lorsque la conservation historique est utile.
+
+## ADR-12 — Identity comme source des comptes et rôles techniques
+
+Le projet utilise ASP.NET Core Identity pour les comptes d'authentification et les rôles techniques. Les profils métier `Student`, `Teacher` et `Parent` restent des entités du domaine et référencent l'identifiant du compte Identity. Les permissions fonctionnelles restent dans le modèle métier afin de pouvoir exprimer des droits plus fins que les seuls rôles.
+
+Conséquence : le `DbContext` d'Infrastructure sera basé sur `IdentityDbContext`, et les tables Identity seront la source de vérité pour les comptes, mots de passe et rôles. Les tables métier ne dupliquent pas ces données d'authentification.
