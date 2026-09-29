@@ -20,3 +20,12 @@ jobs:
         run: dotnet build EduGest.sln --configuration Release --no-restore
       - name: Test
         run: dotnet test EduGest.sln --configuration Release --no-build
+      - name: Install EF Core CLI
+        run: dotnet tool install --global dotnet-ef --version 8.0.11
+      - name: Generate initial EF Core migration
+        run: dotnet ef migrations add InitialCreate --project src/EduGest.Infrastructure/EduGest.Infrastructure.csproj --startup-project src/EduGest.Api/EduGest.Api.csproj --output-dir Persistence/Migrations
+      - name: Upload generated migration
+        uses: actions/upload-artifact@v4
+        with:
+          name: ef-initial-migration
+          path: src/EduGest.Infrastructure/Persistence/Migrations
