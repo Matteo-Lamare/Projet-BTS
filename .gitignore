@@ -1,0 +1,17 @@
+# Build
+bin/
+obj/
+.vs/
+
+# IDE
+.idea/
+
+# Secrets
+appsettings.*.json
+!appsettings.json
+*.pfx
+*.key
+
+# User-specific
+*.user
+*.suo
