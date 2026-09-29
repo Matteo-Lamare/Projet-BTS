@@ -1,3 +1,5 @@
+using Xunit;
+
 namespace EduGest.UnitTests;
 
 public class SmokeTests
