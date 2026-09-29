@@ -1,6 +1,5 @@
--- Schéma initial - Projet BTS SIO
--- Cible provisoire : PostgreSQL 15 ou version ultérieure.
--- Les mots de passe ne sont jamais stockés en clair.
+-- Schéma documentaire PostgreSQL - Projet BTS SIO
+-- Les migrations EF Core seront la source de vérité pendant le développement.
 
 BEGIN;
 
@@ -11,6 +10,7 @@ CREATE TABLE users (
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    deleted_at TIMESTAMPTZ,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -46,7 +46,8 @@ CREATE TABLE students (
     internal_number VARCHAR(50) NOT NULL UNIQUE,
     birth_date DATE,
     phone VARCHAR(30),
-    address TEXT
+    address TEXT,
+    deleted_at TIMESTAMPTZ
 );
 
 CREATE TABLE teachers (
@@ -54,7 +55,23 @@ CREATE TABLE teachers (
     user_id BIGINT NOT NULL UNIQUE REFERENCES users(id) ON DELETE RESTRICT,
     internal_number VARCHAR(50) NOT NULL UNIQUE,
     phone VARCHAR(30),
-    address TEXT
+    address TEXT,
+    deleted_at TIMESTAMPTZ
+);
+
+CREATE TABLE parents (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id BIGINT NOT NULL UNIQUE REFERENCES users(id) ON DELETE RESTRICT,
+    phone VARCHAR(30),
+    address TEXT,
+    deleted_at TIMESTAMPTZ
+);
+
+CREATE TABLE parent_students (
+    parent_id BIGINT NOT NULL REFERENCES parents(id) ON DELETE CASCADE,
+    student_id BIGINT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    relationship VARCHAR(50),
+    PRIMARY KEY (parent_id, student_id)
 );
 
 CREATE TABLE academic_years (
@@ -127,6 +144,7 @@ CREATE TABLE grades (
 CREATE TABLE attendance_events (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     student_id BIGINT NOT NULL REFERENCES students(id) ON DELETE RESTRICT,
+    session_id BIGINT,
     event_type VARCHAR(20) NOT NULL,
     starts_at TIMESTAMPTZ NOT NULL,
     ends_at TIMESTAMPTZ,
@@ -158,6 +176,10 @@ CREATE TABLE sessions (
     CHECK (ends_at > starts_at)
 );
 
+ALTER TABLE attendance_events
+    ADD CONSTRAINT fk_attendance_session
+    FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE SET NULL;
+
 CREATE TABLE documents (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     uploaded_by BIGINT NOT NULL REFERENCES users(id) ON DELETE RESTRICT,
@@ -165,6 +187,7 @@ CREATE TABLE documents (
     storage_key VARCHAR(500) NOT NULL UNIQUE,
     mime_type VARCHAR(150) NOT NULL,
     file_size_bytes BIGINT NOT NULL,
+    deleted_at TIMESTAMPTZ,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CHECK (file_size_bytes > 0)
 );
@@ -179,6 +202,12 @@ CREATE TABLE document_students (
     document_id BIGINT NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
     student_id BIGINT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
     PRIMARY KEY (document_id, student_id)
+);
+
+CREATE TABLE document_subjects (
+    document_id BIGINT NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
+    subject_id BIGINT NOT NULL REFERENCES subjects(id) ON DELETE CASCADE,
+    PRIMARY KEY (document_id, subject_id)
 );
 
 CREATE TABLE conversations (
@@ -221,6 +250,7 @@ CREATE INDEX idx_assignments_class_year ON teaching_assignments (class_id, acade
 CREATE INDEX idx_assessments_assignment ON assessments (teaching_assignment_id);
 CREATE INDEX idx_grades_student ON grades (student_id);
 CREATE INDEX idx_attendance_student_start ON attendance_events (student_id, starts_at);
+CREATE INDEX idx_attendance_session ON attendance_events (session_id);
 CREATE INDEX idx_sessions_start ON sessions (starts_at);
 CREATE INDEX idx_messages_conversation_sent ON messages (conversation_id, sent_at);
 CREATE INDEX idx_audit_logs_created_at ON audit_logs (created_at);

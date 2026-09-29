@@ -1,76 +1,73 @@
 # Modèle logique de données
 
-## Convention
+## Référence
 
-Ce modèle traduit le [modèle conceptuel de données](MCD.md) en tables relationnelles.
-
-Le fichier [database/schema.sql](database/schema.sql) propose une implémentation PostgreSQL. PostgreSQL est une cible provisoire : le modèle reste transposable vers un autre système de gestion de base de données si le choix technique change.
+Le modèle logique traduit le MCD en tables relationnelles PostgreSQL. Les migrations EF Core deviendront la source de vérité pour l'évolution de la base pendant le développement ; `schema.sql` reste la représentation documentaire et de démonstration.
 
 ## Tables
 
-### Accès et autorisations
+### Accès
 
-| Table | Clé primaire | Clés étrangères | Rôle |
-| --- | --- | --- | --- |
-| users | id | - | Comptes de connexion |
-| roles | id | - | Rôles fonctionnels |
-| permissions | id | - | Permissions unitaires |
-| user_roles | user_id, role_id | users, roles | Attribution des rôles |
-| role_permissions | role_id, permission_id | roles, permissions | Permissions accordées à un rôle |
-| students | id | user_id | Profil d'élève |
-| teachers | id | user_id | Profil de professeur |
+| Table | Clé primaire | Rôle |
+| --- | --- | --- |
+| users | id | Comptes |
+| roles | id | Rôles |
+| permissions | id | Permissions |
+| user_roles | user_id, role_id | Attribution des rôles |
+| role_permissions | role_id, permission_id | Attribution des permissions |
+| students | id | Profils élèves |
+| teachers | id | Profils professeurs |
+| parents | id | Profils parents |
+| parent_students | parent_id, student_id | Liens parent-enfant |
 
 ### Organisation scolaire
 
-| Table | Clé primaire | Clés étrangères | Rôle |
-| --- | --- | --- | --- |
-| academic_years | id | - | Années scolaires |
-| classes | id | - | Classes |
-| subjects | id | - | Matières |
-| enrollments | id | student_id, class_id, academic_year_id | Inscription d'un élève dans une classe |
-| teaching_assignments | id | teacher_id, class_id, subject_id, academic_year_id | Attribution d'un enseignement |
+| Table | Clé primaire | Rôle |
+| --- | --- | --- |
+| academic_years | id | Années scolaires |
+| classes | id | Classes |
+| subjects | id | Matières |
+| enrollments | id | Inscriptions annuelles |
+| teaching_assignments | id | Affectations d'enseignement |
 
 ### Scolarité
 
-| Table | Clé primaire | Clés étrangères | Rôle |
-| --- | --- | --- | --- |
-| assessments | id | teaching_assignment_id | Évaluations |
-| grades | id | assessment_id, student_id | Notes |
-| attendance_events | id | student_id, justified_by | Absences et retards |
-| rooms | id | - | Salles |
-| sessions | id | teaching_assignment_id, room_id | Séances d'emploi du temps |
+| Table | Clé primaire | Rôle |
+| --- | --- | --- |
+| assessments | id | Évaluations |
+| grades | id | Notes |
+| attendance_events | id | Absences / retards |
+| rooms | id | Salles |
+| sessions | id | Séances d'emploi du temps |
 
-### Documents, messagerie et traçabilité
+### Documents
 
-| Table | Clé primaire | Clés étrangères | Rôle |
-| --- | --- | --- | --- |
-| documents | id | uploaded_by | Métadonnées des documents déposés |
-| document_classes | document_id, class_id | documents, classes | Ciblage d'un document par classe |
-| document_students | document_id, student_id | documents, students | Ciblage d'un document par élève |
-| conversations | id | - | Conversations |
-| conversation_participants | conversation_id, user_id | conversations, users | Participants d'une conversation |
-| messages | id | conversation_id, author_id | Messages |
-| audit_logs | id | user_id | Journal des actions sensibles |
+| Table | Clé primaire | Rôle |
+| --- | --- | --- |
+| documents | id | Métadonnées des fichiers |
+| document_classes | document_id, class_id | Ciblage classe |
+| document_students | document_id, student_id | Ciblage élève |
+| document_subjects | document_id, subject_id | Ciblage matière |
+
+### Messagerie et audit
+
+| Table | Clé primaire | Rôle |
+| --- | --- | --- |
+| conversations | id | Conversations |
+| conversation_participants | conversation_id, user_id | Participants |
+| messages | id | Messages |
+| audit_logs | id | Journal des actions |
 
 ## Contraintes principales
 
-- L'adresse électronique d'un compte est unique.
-- Un élève et un professeur sont chacun associés à un seul compte.
-- Un élève ne peut posséder qu'une inscription par année scolaire.
-- Un professeur ne peut avoir deux fois la même affectation pour une classe, une matière et une année scolaire.
-- Un élève ne peut recevoir qu'une note par évaluation.
-- Une séance est liée à une affectation d'enseignement, ce qui garantit la cohérence entre professeur, classe et matière.
-- Les dates de fin doivent être postérieures aux dates de début.
-- Une note doit être comprise entre zéro et le barème de l'évaluation ; cette règle nécessite une validation applicative ou un déclencheur SQL, car elle compare deux tables.
-- Les fichiers sont stockés hors de la base de données ; seule leur référence de stockage est conservée dans la table documents.
-- Les suppressions d'éléments sensibles doivent être journalisées.
-
-## Passage au développement
-
-Avant de lancer l'API, il faudra :
-
-1. valider PostgreSQL ou remplacer le schéma par l'équivalent du SGBD retenu ;
-2. compléter la liste des permissions initiales ;
-3. créer les migrations à partir de `database/schema.sql` ;
-4. ajouter des données de démonstration anonymisées ;
-5. tester les contraintes et autorisations les plus sensibles.
+- Email utilisateur unique.
+- Un profil élève, professeur ou parent correspond à un seul compte.
+- Un élève possède au plus une inscription par année scolaire.
+- Une affectation d'enseignement est unique pour professeur + classe + matière + année.
+- Une note est unique pour évaluation + élève.
+- Une séance est rattachée à une affectation d'enseignement.
+- Une absence peut être rattachée à une séance.
+- Les dates de fin sont postérieures aux dates de début.
+- Le score d'une note est contrôlé par l'application par rapport au barème de son évaluation.
+- Les fichiers sont stockés hors PostgreSQL ; la base conserve leur référence.
+- Les associations de documents sont limitées par les autorisations métier.

@@ -1,48 +1,55 @@
 # Découpage des applications
 
-## Principe d'architecture
+## Principe
 
-Les deux applications utilisent une API et une base de données communes. Les règles d'autorisation sont appliquées par l'API ; une restriction d'interface ne remplace jamais un contrôle côté serveur.
+Les deux applications utilisent la même API et la même base de données. L'API est la seule frontière d'accès aux données et applique toutes les règles métier et d'autorisation.
 
-## Application légère
+## R1 — application lourde WPF
 
-Destinée aux élèves et aux professeurs.
+Public principal : administration et professeurs.
 
-| Fonctionnalité | Élève | Professeur |
+| Fonctionnalité | Administration | Professeur |
 | --- | --- | --- |
-| Connexion et profil | Consulter et modifier son profil | Consulter et modifier son profil |
-| Notes | Consulter ses résultats | Créer et modifier les notes de ses classes |
-| Absences et retards | Consulter ses informations | Déclarer et modifier les informations de ses classes |
-| Documents | Consulter et télécharger | Déposer et gérer les documents de ses classes |
-| Messagerie | Envoyer et recevoir | Envoyer et recevoir |
-| Emploi du temps | Consulter | Consulter |
-| Tableau de bord | Consulter | Consulter |
+| Connexion / profil | Oui | Oui |
+| Élèves | CRUD | Consultation des classes affectées |
+| Professeurs | CRUD | Consultation |
+| Classes / matières | CRUD | Consultation |
+| Affectations d'enseignement | Gestion | Consultation |
+| Évaluations | Gestion | Gestion de ses affectations |
+| Notes | Gestion | Gestion de ses affectations |
+| Absences / retards | Gestion | Gestion de ses classes |
+| Documents | Gestion | Dépôt et gestion selon périmètre |
+| Statistiques | Consultation | Selon droits |
+| Journal d'actions | Consultation selon droits | Non par défaut |
 
-## Application lourde
+## R2 — application web responsive
 
-Destinée au personnel administratif et aux administrateurs.
+Public principal : élèves et parents ; accès également prévu pour les professeurs.
 
-| Fonctionnalité | Administration | Administrateur |
-| --- | --- | --- |
-| Élèves | Gérer | Gérer |
-| Professeurs | Gérer | Gérer |
-| Classes et matières | Gérer | Gérer |
-| Documents | Gérer | Gérer |
-| Utilisateurs et rôles | Consulter selon besoin | Gérer |
-| Paramètres | Non | Gérer |
-| Statistiques | Consulter | Consulter |
-| Journal des actions | Consulter selon besoin | Consulter |
+| Fonctionnalité | Élève | Parent | Professeur |
+| --- | --- | --- | --- |
+| Connexion / profil | Oui | Oui | Oui |
+| Notes | Ses notes | Notes de ses enfants | Ses classes |
+| Absences / retards | Ses données | Données de ses enfants | Ses classes |
+| Documents | Documents autorisés | Documents autorisés de ses enfants | Dépôt / consultation autorisés |
+| Emploi du temps | Oui | Oui, pour les enfants | Oui |
+| Messagerie | Avec professeurs / classe | Hors périmètre initial | Avec élèves / classe |
+| Tableau de bord | Oui | Oui | Oui |
+
+## Règles de messagerie
+
+- Les élèves peuvent échanger avec les professeurs.
+- Un élève peut écrire à un groupe/classe.
+- La messagerie privée élève ↔ élève est hors périmètre.
+- Les parents n'utilisent pas la messagerie dans la première version.
+- SignalR sert uniquement à la diffusion temps réel des nouveaux messages ; REST reste utilisé pour l'historique.
 
 ## Responsabilités partagées
 
 | Élément | Règle |
 | --- | --- |
-| API | Expose les données et applique les règles métier et les autorisations |
-| Base de données | Source unique des données de l'établissement |
-| Authentification | Gérée de façon centralisée pour les deux applications |
-| Journalisation | Conserve les actions sensibles d'administration |
-| Fichiers | Stockés et servis selon des droits vérifiés par l'API |
-
-## Hors périmètre initial
-
-Les notifications en temps réel, les statistiques avancées et les intégrations externes sont reportées après la mise en place du socle fonctionnel et de sécurité.
+| API | Données, règles métier, authentification et autorisation |
+| Base de données | Source unique des données |
+| Authentification | ASP.NET Core Identity + JWT + refresh token |
+| Fichiers | Stockage serveur/volume, métadonnées en base |
+| Audit | Journal distinct des logs techniques |
