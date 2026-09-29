@@ -1,73 +1,70 @@
 # Modèle logique de données
 
-## Référence
+## Statut et source de vérité
 
-Le modèle logique traduit le MCD en tables relationnelles PostgreSQL. Les migrations EF Core deviendront la source de vérité pour l'évolution de la base pendant le développement ; `schema.sql` reste la représentation documentaire et de démonstration.
+Ce document sépare le **socle actuellement matérialisé par EF Core** de la **cible fonctionnelle encore à développer**. Les migrations EF Core sont la source technique de vérité. `database/schema.sql` est un ancien schéma documentaire conservé pour historique et ne doit pas être exécuté.
 
-## Tables
+ASP.NET Core Identity fournit les tables techniques de comptes et de rôles ; elles ne sont donc pas redéfinies ici comme des tables métier `users` / `roles`.
 
-### Accès
+## Socle actuel
 
-| Table | Clé primaire | Rôle |
-| --- | --- | --- |
-| users | id | Comptes |
-| roles | id | Rôles |
-| permissions | id | Permissions |
-| user_roles | user_id, role_id | Attribution des rôles |
-| role_permissions | role_id, permission_id | Attribution des permissions |
-| students | id | Profils élèves |
-| teachers | id | Profils professeurs |
-| parents | id | Profils parents |
-| parent_students | parent_id, student_id | Liens parent-enfant |
+### Identité et profils
+- tables ASP.NET Core Identity : comptes, rôles et associations techniques ;
+- permissions ;
+- role_permissions ;
+- students ;
+- teachers ;
+- parents ;
+- parent_students ;
+- refresh_tokens.
 
 ### Organisation scolaire
-
-| Table | Clé primaire | Rôle |
-| --- | --- | --- |
-| academic_years | id | Années scolaires |
-| classes | id | Classes |
-| subjects | id | Matières |
-| enrollments | id | Inscriptions annuelles |
-| teaching_assignments | id | Affectations d'enseignement |
+- academic_years ;
+- classes ;
+- subjects ;
+- enrollments ;
+- teaching_assignments.
 
 ### Scolarité
+- assessments ;
+- grades ;
+- rooms ;
+- sessions ;
+- attendance_events.
 
-| Table | Clé primaire | Rôle |
-| --- | --- | --- |
-| assessments | id | Évaluations |
-| grades | id | Notes |
-| attendance_events | id | Absences / retards |
-| rooms | id | Salles |
-| sessions | id | Séances d'emploi du temps |
+Les identifiants du domaine sont des `Guid` dans le modèle actuel.
+
+## Cible fonctionnelle non encore matérialisée dans le DbContext
 
 ### Documents
+- documents ;
+- document_classes ;
+- document_students ;
+- document_subjects.
 
-| Table | Clé primaire | Rôle |
-| --- | --- | --- |
-| documents | id | Métadonnées des fichiers |
-| document_classes | document_id, class_id | Ciblage classe |
-| document_students | document_id, student_id | Ciblage élève |
-| document_subjects | document_id, subject_id | Ciblage matière |
+### Messagerie
+- conversations ;
+- conversation_participants ;
+- messages.
 
-### Messagerie et audit
+### Audit
+- audit_logs.
 
-| Table | Clé primaire | Rôle |
-| --- | --- | --- |
-| conversations | id | Conversations |
-| conversation_participants | conversation_id, user_id | Participants |
-| messages | id | Messages |
-| audit_logs | id | Journal des actions |
+Ces tables restent dans le MCD cible parce qu'elles appartiennent au périmètre prévu, mais leur structure définitive sera arrêtée au moment de leur développement.
 
-## Contraintes principales
+## Contraintes actuellement retenues
 
-- Email utilisateur unique.
-- Un profil élève, professeur ou parent correspond à un seul compte.
-- Un élève possède au plus une inscription par année scolaire.
-- Une affectation d'enseignement est unique pour professeur + classe + matière + année.
-- Une note est unique pour évaluation + élève.
-- Une séance est rattachée à une affectation d'enseignement.
-- Une absence peut être rattachée à une séance.
-- Les dates de fin sont postérieures aux dates de début.
-- Le score d'une note est contrôlé par l'application par rapport au barème de son évaluation.
-- Les fichiers sont stockés hors PostgreSQL ; la base conserve leur référence.
-- Les associations de documents sont limitées par les autorisations métier.
+- un profil Student/Teacher/Parent référence un compte Identity ;
+- un profil d'un même type possède un UserId unique ;
+- une classe appartient à une année scolaire ;
+- couple classe/année unique selon le nom ;
+- code matière unique ;
+- inscription Student/Class unique ;
+- affectation Teacher/Class/Subject unique ;
+- note Assessment/Student unique ;
+- séance rattachée à une affectation, salle facultative ;
+- contrôles métier complémentaires dans l'application : dates, barème, inscription de l'élève et périmètre d'autorisation.
+
+## Règle d'évolution
+
+Toute évolution de la base doit rester cohérente entre entités/configurations EF, migration, tests, dictionnaire de données, MCD/MLD et contrat API.

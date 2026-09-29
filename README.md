@@ -57,6 +57,7 @@ Les applications clientes ne communiquent jamais directement avec PostgreSQL : t
 - [Maquettes - méthode et statut](docs/design/mockups.md)
 - [Gabarit guide R1](docs/user-guides/r1-guide-template.md)
 - [Gabarit guide R2](docs/user-guides/r2-guide-template.md)
+- [Revue de cohérence documentaire](docs/documentation-review.md)
 
 ## Structure cible
 

@@ -1,74 +1,63 @@
 # Périmètre fonctionnel
 
-## Comptes et accès
+Ce document décrit la cible fonctionnelle. Les éléments explicitement marqués « évolution possible » ne font pas partie du périmètre acquis tant qu'ils n'ont pas été décidés puis documentés.
 
+## Comptes et accès
 - Connexion et déconnexion.
 - Gestion du profil.
 - Gestion des utilisateurs, rôles et permissions.
-- Réinitialisation sécurisée de l'accès, selon la solution technique retenue.
+- Réinitialisation sécurisée de l'accès : modalité à décider si cette fonction est retenue.
 
-## Gestion des élèves
+## Élèves
+- Créer, modifier et supprimer un élève selon les dépendances.
+- Consulter sa fiche.
+- L'inscrire dans une classe.
+- Consulter les données autorisées.
 
-- Créer, modifier et supprimer un élève.
-- Consulter la fiche d'un élève.
-- Affecter un élève à une classe.
-- Consulter les notes, absences et documents autorisés.
+## Professeurs
+- Créer, modifier et supprimer selon les dépendances.
+- Consulter la fiche.
+- Affecter matières/classes.
+- Consulter les élèves du périmètre autorisé.
 
-## Gestion des professeurs
-
-- Créer, modifier et supprimer un professeur.
-- Consulter la fiche d'un professeur.
-- Affecter des matières et des classes.
-- Consulter les élèves des classes affectées.
-
-## Gestion des classes et matières
-
-- Créer, modifier et supprimer une classe.
-- Ajouter ou retirer des élèves d'une classe.
-- Affecter des professeurs à une classe.
-- Gérer les matières et, si nécessaire, les groupes de classe.
+## Classes et matières
+- CRUD selon règles métier.
+- Inscriptions et affectations d'enseignement.
+- Les groupes de classe sont une évolution possible.
 
 ## Notes
-
 - Créer une évaluation.
-- Saisir et modifier les notes.
-- Gérer les coefficients.
-- Calculer les moyennes.
-- Consulter les résultats selon les droits de l'utilisateur.
+- Saisir/modifier les notes.
+- Consulter les résultats selon les droits.
+- Coefficients et calcul automatique de moyennes : **évolutions possibles**, à décider avant implémentation.
 
 ## Absences et retards
-
-- Déclarer une absence ou un retard.
-- Justifier une absence.
-- Modifier ou supprimer une déclaration selon les droits.
-- Consulter l'historique.
+- Déclarer, modifier/supprimer selon droits et consulter l'historique.
+- Justification d'absence : **évolution possible**, à décider avant implémentation.
 
 ## Documents
-
-- Déposer, télécharger, classer et supprimer un document.
-- Associer un document à une classe, un élève ou une matière.
-- Limiter l'accès aux utilisateurs autorisés.
+- Déposer, télécharger, classer et supprimer selon droits.
+- Ciblage classe/élève/matière.
+- Contrôle des accès.
 
 ## Messagerie
-
-- Échanges entre élève et professeur.
-- Diffusion à un groupe ou à une classe.
-- Historique des conversations.
-- Notifications, selon le périmètre retenu.
+- Élève ↔ professeur.
+- Diffusion groupe/classe.
+- Historique.
+- Temps réel via SignalR si la fonctionnalité est réalisée comme prévu.
+- Notifications supplémentaires : évolution possible.
 
 ## Emploi du temps
-
-- Créer un cours.
-- Associer un cours à une classe, un professeur et une salle.
-- Consulter l'emploi du temps selon le rôle.
+- Séances associées à une affectation et éventuellement une salle.
+- Consultation selon rôle.
+- L'édition complète de planning par interface sera précisée lors du développement.
 
 ## Tableau de bord
-
-- Afficher les informations utiles au rôle connecté : moyenne, absences, prochains cours, messages et informations importantes.
+Afficher des informations utiles au rôle connecté. Le contenu exact sera décidé avec les maquettes afin de ne pas imposer prématurément moyenne, messages ou indicateurs non encore réalisés.
 
 ## Administration et suivi
-
-- Gérer les utilisateurs, rôles et permissions.
-- Gérer l'année scolaire et les paramètres de l'établissement.
-- Consulter des statistiques.
-- Consulter le journal des actions administratives.
+- Gestion des comptes/rôles/permissions selon périmètre.
+- Années scolaires.
+- Statistiques prévues pour R1.
+- Journal des actions prévu.
+- Paramètres d'établissement : contenu exact à définir avant implémentation.
