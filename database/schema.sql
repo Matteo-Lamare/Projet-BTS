@@ -1,3 +1,8 @@
+-- ATTENTION : SCHÉMA HISTORIQUE / DOCUMENTAIRE, NE PAS EXÉCUTER.
+-- Il ne correspond plus au modèle EF Core + ASP.NET Core Identity actuel.
+-- Les migrations EF Core sont la source de vérité technique.
+-- Voir docs/database/data-dictionary.md et MLD.md pour la documentation actuelle/cible.
+
 -- Schéma documentaire PostgreSQL - Projet BTS SIO
 -- Les migrations EF Core seront la source de vérité pendant le développement.
 

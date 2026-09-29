@@ -45,6 +45,12 @@ Les applications clientes ne communiquent jamais directement avec PostgreSQL : t
 - [Spécifications des interfaces](docs/specifications/ui-specifications.md)
 - [Contexte juridique](docs/specifications/legal-context.md)
 - [Journal des versions](docs/versions.md)
+- [Matrice rôles/permissions](docs/specifications/permissions-matrix.md)
+- [Dictionnaire de données](docs/database/data-dictionary.md)
+- [Sécurité](docs/security/security.md)
+- [Sauvegarde/restauration](docs/operations/backup-restore.md)
+- [Déploiement](docs/operations/deployment.md)
+- [Checklist finale E6](docs/e6/final-checklist.md)
 
 ## Structure cible
 
