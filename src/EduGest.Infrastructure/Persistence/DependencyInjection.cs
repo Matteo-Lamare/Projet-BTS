@@ -1,3 +1,5 @@
+using EduGest.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,8 +13,12 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException("La chaîne de connexion PostgreSQL 'DefaultConnection' est absente.");
 
-        services.AddDbContext<EduGestDbContext>(options =>
-            options.UseNpgsql(connectionString));
+        services.AddDbContext<EduGestDbContext>(options => options.UseNpgsql(connectionString));
+
+        services.AddIdentityCore<ApplicationUser>()
+            .AddRoles<ApplicationRole>()
+            .AddEntityFrameworkStores<EduGestDbContext>()
+            .AddDefaultTokenProviders();
 
         return services;
     }

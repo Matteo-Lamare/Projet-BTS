@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore EduGest.sln
+      - name: Build
+        run: dotnet build EduGest.sln --configuration Release --no-restore
+      - name: Test
+        run: dotnet test EduGest.sln --configuration Release --no-build
