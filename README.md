@@ -38,6 +38,8 @@ Les applications clientes ne communiquent jamais directement avec PostgreSQL : t
 - [Couverture E6](docs/e6/coverage.md)
 - [Environnement technologique E6](docs/e6/environment.md)
 - [Plan de tests](docs/e6/test-plan.md)
+- [Déroulement E6 2026](docs/e6/exam-process.md)
+- [Analyse des écarts E6 2026](docs/e6/gap-analysis-2026.md)
 
 ## Structure cible
 
