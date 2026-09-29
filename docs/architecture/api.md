@@ -1,71 +1,48 @@
 # Contrat API
 
-Base : /api. Les routes protégées nécessitent un JWT valide. Les permissions et le périmètre métier sont vérifiés côté serveur.
+Base : `/api`. Les routes protégées nécessitent un JWT valide. Les permissions et le périmètre métier sont vérifiés côté serveur.
 
-## Authentification
+Ce document distingue les routes **déjà présentes dans le socle** des routes **prévues**. Les contrats pourront évoluer lorsque le candidat développera les interfaces R1/R2.
 
-POST /api/auth/login — connexion.
-POST /api/auth/refresh — renouvellement.
-POST /api/auth/logout — déconnexion.
-GET /api/auth/me — utilisateur courant.
+## Authentification — socle présent
 
-## Référentiels
+- POST `/api/auth/login`
+- POST `/api/auth/refresh`
+- POST `/api/auth/logout`
+- GET `/api/auth/me`
 
-GET/POST /api/students et GET/PUT/DELETE /api/students/{id}.
-GET/POST /api/teachers et GET/PUT/DELETE /api/teachers/{id}.
-GET/POST /api/classes et GET/PUT/DELETE /api/classes/{id}.
-GET/POST /api/subjects et GET/PUT/DELETE /api/subjects/{id}.
-GET/POST /api/teaching-assignments.
-GET /api/academic-years.
+## Référentiels — socle présent
 
-## Notes
+- GET/POST `/api/academic-years` ; GET/PUT/DELETE `/api/academic-years/{id}`
+- GET/POST `/api/classes` ; GET/PUT/DELETE `/api/classes/{id}`
+- GET/POST `/api/subjects` ; GET/PUT/DELETE `/api/subjects/{id}`
+- GET/POST `/api/students` ; GET/PUT/DELETE `/api/students/{id}`
+- GET/POST `/api/teachers` ; GET/PUT/DELETE `/api/teachers/{id}`
+- GET/POST `/api/enrollments` ; DELETE `/api/enrollments/{id}`
+- GET/POST `/api/teaching-assignments` ; DELETE `/api/teaching-assignments/{id}`
 
-GET/POST /api/assessments.
-GET/PUT/DELETE /api/assessments/{id}.
-GET /api/assessments/{id}/grades.
-PUT /api/assessments/{id}/grades/{studentId}.
-GET /api/students/{id}/grades.
+## Évaluations et notes — socle présent
 
-## Assiduité
+- GET/POST `/api/assessments`
+- GET/PUT/DELETE `/api/assessments/{id}`
+- GET/POST `/api/grades`
+- GET/PUT/DELETE `/api/grades/{id}`
 
-GET /api/attendance.
-POST /api/attendance.
-PUT /api/attendance/{id}.
-DELETE /api/attendance/{id}.
+## Séances et assiduité — socle présent
 
-## Documents
+- GET/POST `/api/sessions`
+- GET/PUT/DELETE `/api/sessions/{id}`
+- GET/POST `/api/attendance`
+- GET/PUT/DELETE `/api/attendance/{id}`
 
-GET /api/documents.
-POST /api/documents.
-GET /api/documents/{id}.
-GET /api/documents/{id}/download.
-DELETE /api/documents/{id}.
+## Routes prévues, non considérées comme réalisées
 
-## Emploi du temps
+Documents, statistiques, audit, gestion avancée des utilisateurs/permissions et messagerie/SignalR seront documentés précisément lorsqu'ils seront effectivement développés.
 
-GET /api/sessions.
-POST /api/sessions.
-PUT/DELETE /api/sessions/{id}.
+## Codes HTTP
 
-## Messagerie
+Le socle utilise notamment : 200 lecture, 201 création, 204 succès sans contenu, 400 données invalides, 401 non authentifié, 403 non autorisé, 404 ressource absente et 409 conflit.
 
-GET /api/conversations.
-POST /api/conversations.
-GET /api/conversations/{id}/messages.
-POST /api/conversations/{id}/messages.
+## Règle pour la suite
 
-Hub SignalR : /hubs/chat. Événements : MessageReceived, JoinConversation, LeaveConversation, MarkAsRead.
-
-## Administration
-
-GET /api/statistics.
-GET /api/audit-logs.
-GET/POST/PUT /api/users.
-GET/PUT /api/roles/{id}.
-GET/PUT /api/permissions/{id}.
-
-## Réponses HTTP
-
-200 lecture/modification, 201 création, 204 sans contenu, 400 requête invalide, 401 non authentifié, 403 non autorisé, 404 ressource absente/non accessible, 409 conflit, 422 règle métier refusée, 500 erreur interne sans détail sensible.
-
-Les DTO détaillés seront figés avant l'implémentation des contrôleurs.
+Les DTO et routes définitifs doivent rester compréhensibles par le candidat. Toute modification du contrat API est documentée avec la fonctionnalité correspondante.

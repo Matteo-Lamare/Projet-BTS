@@ -12,7 +12,7 @@ Proposer deux interfaces complémentaires s'appuyant sur une API et une base de 
 ## Architecture retenue
 
 - WPF / C# / MVVM pour R1 ;
-- HTML / CSS / JavaScript vanilla pour R2 ;
+- HTML / Tailwind CSS / JavaScript vanilla pour R2 ;
 - ASP.NET Core Web API pour le backend ;
 - SignalR pour la messagerie temps réel ;
 - PostgreSQL + Entity Framework Core pour les données ;
@@ -35,6 +35,9 @@ Les applications clientes ne communiquent jamais directement avec PostgreSQL : t
 - [Décisions techniques](docs/architecture/decisions.md)
 - [Contrat API](docs/architecture/api.md)
 - [DevOps et déploiement](docs/devops.md)
+- [Couverture E6](docs/e6/coverage.md)
+- [Environnement technologique E6](docs/e6/environment.md)
+- [Plan de tests](docs/e6/test-plan.md)
 
 ## Structure cible
 
@@ -64,7 +67,7 @@ infrastructure/
 
 ## État du projet
 
-Le cadrage fonctionnel, le modèle de données, l'architecture technique et la stratégie DevOps sont validés. Le code applicatif sera développé progressivement par tranches verticales, en commençant par l'authentification et le socle API.
+Le cadrage fonctionnel et l'architecture sont documentés. Un socle API, authentification/autorisation, persistance et tests d'intégration est préparé. Les interfaces R1/R2 et les fonctionnalités finales restent à développer et à maîtriser par le candidat.
 
 ## Règles de dépôt
 

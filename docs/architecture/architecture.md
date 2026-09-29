@@ -16,7 +16,7 @@ WPF (R1) et Web (R2) consomment la même API ASP.NET Core, qui est la seule port
 
 Flux : Client → Controller → Application Service → Infrastructure/EF Core → PostgreSQL.
 
-Les entités EF Core ne sont jamais exposées directement : les échanges utilisent des DTO.
+Cible d'architecture : les échanges utilisent des DTO séparés des entités EF Core. Le socle préparatoire expose encore certaines entités directement ; ce point sera refactoré progressivement par le candidat lors du développement.
 
 ## Authentification et autorisation
 
