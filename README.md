@@ -51,6 +51,12 @@ Les applications clientes ne communiquent jamais directement avec PostgreSQL : t
 - [Sauvegarde/restauration](docs/operations/backup-restore.md)
 - [Déploiement](docs/operations/deployment.md)
 - [Checklist finale E6](docs/e6/final-checklist.md)
+- [Diagrammes de conception](docs/architecture/diagrams.md)
+- [Installation et lancement](docs/operations/installation-run.md)
+- [Procédure de recette](docs/testing/acceptance-procedure.md)
+- [Maquettes - méthode et statut](docs/design/mockups.md)
+- [Gabarit guide R1](docs/user-guides/r1-guide-template.md)
+- [Gabarit guide R2](docs/user-guides/r2-guide-template.md)
 
 ## Structure cible
 
