@@ -12,8 +12,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduGest.Api", "src\EduGest.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduGest.Desktop", "src\EduGest.Desktop\EduGest.Desktop.csproj", "{5C5A6F2D-A45A-4F3C-AB11-9F114F8D7105}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduGest.Web", "src\EduGest.Web\EduGest.Web.csproj", "{6C6A6F2D-A45A-4F3C-AB11-9F114F8D7106}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduGest.UnitTests", "tests\EduGest.UnitTests\EduGest.UnitTests.csproj", "{7C7A6F2D-A45A-4F3C-AB11-9F114F8D7107}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduGest.IntegrationTests", "tests\EduGest.IntegrationTests\EduGest.IntegrationTests.csproj", "{8C8A6F2D-A45A-4F3C-AB11-9F114F8D7108}"
@@ -44,10 +42,6 @@ Global
 		{5C5A6F2D-A45A-4F3C-AB11-9F114F8D7105}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C5A6F2D-A45A-4F3C-AB11-9F114F8D7105}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C5A6F2D-A45A-4F3C-AB11-9F114F8D7105}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C6A6F2D-A45A-4F3C-AB11-9F114F8D7106}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C6A6F2D-A45A-4F3C-AB11-9F114F8D7106}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C6A6F2D-A45A-4F3C-AB11-9F114F8D7106}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C6A6F2D-A45A-4F3C-AB11-9F114F8D7106}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7C7A6F2D-A45A-4F3C-AB11-9F114F8D7107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7C7A6F2D-A45A-4F3C-AB11-9F114F8D7107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C7A6F2D-A45A-4F3C-AB11-9F114F8D7107}.Release|Any CPU.ActiveCfg = Release|Any CPU
