@@ -15,7 +15,8 @@
 - [x] spécifications UI
 - [x] matrice rôles/permissions
 - [x] dictionnaire de données
-- [ ] maquettes/captures finales
+- [x] direction des maquettes validée
+- [ ] captures finales de R1/R2 implémentées
 
 ## Maintenance et tests
 - [ ] vraie correction/évolution documentée
@@ -28,7 +29,7 @@
 - [ ] recette R1 et R2
 
 ## Données/exploitation
-- [ ] migrations cohérentes
+- [ ] migrations cohérentes avec la version finale
 - [ ] PostgreSQL déployé
 - [ ] sauvegarde exécutée
 - [ ] restauration testée/documentée
@@ -40,7 +41,7 @@
 - [ ] documentation technique finale
 - [ ] guide utilisateur R1
 - [ ] guide utilisateur R2
-- [ ] procédure de lancement/installation
+- [ ] procédure de lancement/installation réellement vérifiée
 
 ## Environnement technologique à valider avec le centre
 - [ ] authentification et SGBD
