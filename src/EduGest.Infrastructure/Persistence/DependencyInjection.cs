@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace EduGest.Infrastructure.Persistence;
 
@@ -15,7 +16,17 @@ public static class DependencyInjection
 
         services.AddDbContext<EduGestDbContext>(options => options.UseNpgsql(connectionString));
 
-        services.AddIdentityCore<ApplicationUser>()
+        services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
+        services.AddScoped<TokenService>();
+
+        services.AddIdentityCore<ApplicationUser>(options =>
+        {
+            options.Password.RequiredLength = 10;
+            options.Password.RequireDigit = true;
+            options.Password.RequireUppercase = true;
+            options.Password.RequireLowercase = true;
+            options.Password.RequireNonAlphanumeric = true;
+        })
             .AddRoles<ApplicationRole>()
             .AddEntityFrameworkStores<EduGestDbContext>();
 
