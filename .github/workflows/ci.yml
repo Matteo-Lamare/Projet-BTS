@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: write
+
 jobs:
   build-and-test:
     runs-on: windows-latest
@@ -21,11 +24,23 @@ jobs:
       - name: Test
         run: dotnet test EduGest.sln --configuration Release --no-build
       - name: Install EF Core CLI
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: dotnet tool install --global dotnet-ef --version 8.0.11
       - name: Generate initial EF Core migration
-        run: dotnet ef migrations add InitialCreate --project src/EduGest.Infrastructure/EduGest.Infrastructure.csproj --startup-project src/EduGest.Api/EduGest.Api.csproj --output-dir Persistence/Migrations
-      - name: Upload generated migration
-        uses: actions/upload-artifact@v4
-        with:
-          name: ef-initial-migration
-          path: src/EduGest.Infrastructure/Persistence/Migrations
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "src/EduGest.Infrastructure/Persistence/Migrations/EduGestDbContextModelSnapshot.cs")) {
+            dotnet ef migrations add InitialCreate --project src/EduGest.Infrastructure/EduGest.Infrastructure.csproj --startup-project src/EduGest.Api/EduGest.Api.csproj --output-dir Persistence/Migrations
+          }
+      - name: Commit generated initial migration
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: pwsh
+        run: |
+          git add src/EduGest.Infrastructure/Persistence/Migrations
+          if (-not (git diff --cached --quiet)) {
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "chore: ajouter la migration EF Core initiale"
+            git push
+          }
