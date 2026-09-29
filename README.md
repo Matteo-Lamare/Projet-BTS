@@ -40,6 +40,11 @@ Les applications clientes ne communiquent jamais directement avec PostgreSQL : t
 - [Plan de tests](docs/e6/test-plan.md)
 - [Déroulement E6 2026](docs/e6/exam-process.md)
 - [Analyse des écarts E6 2026](docs/e6/gap-analysis-2026.md)
+- [Cahier des charges](docs/specifications/cahier-des-charges.md)
+- [Cas d'utilisation et règles métier](docs/specifications/use-cases.md)
+- [Spécifications des interfaces](docs/specifications/ui-specifications.md)
+- [Contexte juridique](docs/specifications/legal-context.md)
+- [Journal des versions](docs/versions.md)
 
 ## Structure cible
 
