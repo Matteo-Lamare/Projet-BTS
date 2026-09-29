@@ -10,7 +10,7 @@ namespace EduGest.Api.Controllers;
 [Route("api/classes")]
 public sealed class ClassesController(EduGestDbContext db) : ControllerBase
 {
-    public sealed record Request(string Name, Guid AcademicYearId);
+    public sealed record SaveRequest(string Name, Guid AcademicYearId);
 
     [HttpGet, Authorize(Policy = "Permission:classes.read")]
     public async Task<IActionResult> GetAll(CancellationToken ct) => Ok(await db.Classes.AsNoTracking().OrderBy(x => x.Name).ToListAsync(ct));
@@ -19,7 +19,7 @@ public sealed class ClassesController(EduGestDbContext db) : ControllerBase
     public async Task<IActionResult> GetById(Guid id, CancellationToken ct) => await db.Classes.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id, ct) is { } x ? Ok(x) : NotFound();
 
     [HttpPost, Authorize(Policy = "Permission:classes.write")]
-    public async Task<IActionResult> Create(Request request, CancellationToken ct)
+    public async Task<IActionResult> Create(SaveRequest request, CancellationToken ct)
     {
         var name = request.Name.Trim();
         if (name.Length is < 1 or > 100) return BadRequest();
@@ -30,7 +30,7 @@ public sealed class ClassesController(EduGestDbContext db) : ControllerBase
     }
 
     [HttpPut("{id:guid}"), Authorize(Policy = "Permission:classes.write")]
-    public async Task<IActionResult> Update(Guid id, Request request, CancellationToken ct)
+    public async Task<IActionResult> Update(Guid id, SaveRequest request, CancellationToken ct)
     {
         var entity = await db.Classes.FindAsync([id], ct); if (entity is null) return NotFound();
         var name = request.Name.Trim(); if (name.Length is < 1 or > 100) return BadRequest();

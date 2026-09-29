@@ -10,14 +10,14 @@ namespace EduGest.Api.Controllers;
 [Route("api/academic-years")]
 public sealed class AcademicYearsController(EduGestDbContext db) : ControllerBase
 {
-    public sealed record Request(string Label, DateTime StartDate, DateTime EndDate);
+    public sealed record SaveRequest(string Label, DateTime StartDate, DateTime EndDate);
 
     [HttpGet, Authorize(Policy = "Permission:classes.read")]
     public async Task<IActionResult> GetAll(CancellationToken ct) =>
         Ok(await db.AcademicYears.AsNoTracking().OrderByDescending(x => x.StartDate).ToListAsync(ct));
 
     [HttpPost, Authorize(Policy = "Permission:classes.write")]
-    public async Task<IActionResult> Create(Request request, CancellationToken ct)
+    public async Task<IActionResult> Create(SaveRequest request, CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(request.Label) || request.StartDate >= request.EndDate)
             return ValidationProblem("Le libellé est obligatoire et la date de début doit précéder la date de fin.");
@@ -33,7 +33,7 @@ public sealed class AcademicYearsController(EduGestDbContext db) : ControllerBas
         await db.AcademicYears.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id, ct) is { } x ? Ok(x) : NotFound();
 
     [HttpPut("{id:guid}"), Authorize(Policy = "Permission:classes.write")]
-    public async Task<IActionResult> Update(Guid id, Request request, CancellationToken ct)
+    public async Task<IActionResult> Update(Guid id, SaveRequest request, CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(request.Label) || request.StartDate >= request.EndDate) return BadRequest();
         var entity = await db.AcademicYears.FindAsync([id], ct); if (entity is null) return NotFound();

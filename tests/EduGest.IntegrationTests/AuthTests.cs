@@ -130,7 +130,8 @@ public sealed class AuthApiFactory : WebApplicationFactory<Program>
             var user = await manager.FindByNameAsync("integration.admin");
             Assert.NotNull(user);
             var current = await manager.GetRolesAsync(user!);
-            if (!current.Contains(role)) await manager.AddToRoleAsync(user!, role);
+            if (current.Count > 0) await manager.RemoveFromRolesAsync(user!, current);
+            await manager.AddToRoleAsync(user!, role);
         }
     }
 
