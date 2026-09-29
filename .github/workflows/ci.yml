@@ -26,21 +26,21 @@ jobs:
       - name: Install EF Core CLI
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: dotnet tool install --global dotnet-ef --version 8.0.11
-      - name: Generate initial EF Core migration
+      - name: Generate pending EF Core migration
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         shell: pwsh
         run: |
-          if (-not (Test-Path "src/EduGest.Infrastructure/Persistence/Migrations/EduGestDbContextModelSnapshot.cs")) {
-            dotnet ef migrations add InitialCreate --project src/EduGest.Infrastructure/EduGest.Infrastructure.csproj --startup-project src/EduGest.Api/EduGest.Api.csproj --output-dir Persistence/Migrations
-          }
-      - name: Commit generated initial migration
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        shell: pwsh
-        run: |
-          git add src/EduGest.Infrastructure/Persistence/Migrations
-          if (-not (git diff --cached --quiet)) {
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "chore: ajouter la migration EF Core initiale"
-            git push
+          dotnet ef migrations add AutoMigration --project src/EduGest.Infrastructure/EduGest.Infrastructure.csproj --startup-project src/EduGest.Api/EduGest.Api.csproj --output-dir Persistence/Migrations
+          $migration = Get-ChildItem "src/EduGest.Infrastructure/Persistence/Migrations/*_AutoMigration.cs" | Select-Object -First 1
+          if ($null -ne $migration) {
+            $content = Get-Content $migration.FullName -Raw
+            if ($content -match "migrationBuilder\.(CreateTable|AddColumn|AlterColumn|DropColumn|DropTable|CreateIndex|AddForeignKey)") {
+              git add src/EduGest.Infrastructure/Persistence/Migrations
+              git config user.name "github-actions[bot]"
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              git commit -m "chore: ajouter la migration EF Core en attente"
+              git push
+            } else {
+              dotnet ef migrations remove --force --project src/EduGest.Infrastructure/EduGest.Infrastructure.csproj --startup-project src/EduGest.Api/EduGest.Api.csproj
+            }
           }
