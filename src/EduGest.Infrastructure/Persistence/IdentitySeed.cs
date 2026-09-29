@@ -19,9 +19,9 @@ public static class IdentitySeed
         ["Administrator"] = Permissions.All
     };
 
-    public static async Task SeedAsync(EduGestDbContext db, RoleManager<ApplicationRole> roleManager, CancellationToken cancellationToken = default)
+    public static async Task SeedAsync(EduGestDbContext db, RoleManager<ApplicationRole> roleManager, bool migrate = true, CancellationToken cancellationToken = default)
     {
-        await db.Database.MigrateAsync(cancellationToken);
+        if (migrate) await db.Database.MigrateAsync(cancellationToken);
         foreach (var roleName in Roles)
             if (!await roleManager.RoleExistsAsync(roleName))
                 await roleManager.CreateAsync(new ApplicationRole { Id = DeterministicGuid("role:" + roleName), Name = roleName });

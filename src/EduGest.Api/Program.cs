@@ -38,6 +38,9 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
+if (!app.Environment.IsEnvironment("Testing"))
+    await DatabaseInitializer.InitializeAsync(app.Services, app.Configuration);
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

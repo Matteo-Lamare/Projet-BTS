@@ -50,6 +50,31 @@ public sealed class AuthTests : IClassFixture<AuthApiFactory>
         Assert.Equal(HttpStatusCode.Unauthorized, reuse.StatusCode);
     }
 
+    [Fact]
+    public async Task Permission_endpoint_returns_401_without_token()
+    {
+        var response = await _factory.CreateClient().GetAsync("/api/authorization/users-manage");
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Permission_endpoint_returns_403_without_permission()
+    {
+        await _factory.EnsureUserAsync();
+        var client = await _factory.LoginAsync();
+        var response = await client.GetAsync("/api/authorization/users-manage");
+        Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task Administrator_can_access_users_manage_permission()
+    {
+        await _factory.EnsureUserAsync("Administrator");
+        var client = await _factory.LoginAsync();
+        var response = await client.GetAsync("/api/authorization/users-manage");
+        Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+    }
+
     private sealed record TokenResponse(string AccessToken, string RefreshToken);
 }
 
@@ -75,19 +100,41 @@ public sealed class AuthApiFactory : WebApplicationFactory<Program>
         });
     }
 
-    public async Task EnsureUserAsync()
+    public async Task<HttpClient> LoginAsync()
+    {
+        var client = CreateClient();
+        var login = await client.PostAsJsonAsync("/api/auth/login", new { userName = "integration.admin", password = "ValidPassword1!" });
+        login.EnsureSuccessStatusCode();
+        var tokens = await login.Content.ReadFromJsonAsync<TokenPair>();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens!.AccessToken);
+        return client;
+    }
+
+    public async Task EnsureUserAsync(string? role = null)
     {
         using var scope = Services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<EduGestDbContext>();
         await db.Database.EnsureCreatedAsync();
         var manager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+        await IdentitySeed.SeedAsync(db, roleManager, migrate: false);
         if (await manager.FindByNameAsync("integration.admin") is null)
         {
             var user = new ApplicationUser { Id = Guid.NewGuid(), UserName = "integration.admin", Email = "integration@example.test" };
             var result = await manager.CreateAsync(user, "ValidPassword1!");
             Assert.True(result.Succeeded, string.Join("; ", result.Errors.Select(x => x.Description)));
         }
+
+        if (role is not null)
+        {
+            var user = await manager.FindByNameAsync("integration.admin");
+            Assert.NotNull(user);
+            var current = await manager.GetRolesAsync(user!);
+            if (!current.Contains(role)) await manager.AddToRoleAsync(user!, role);
+        }
     }
+
+    private sealed record TokenPair(string AccessToken, string RefreshToken);
 
     protected override void Dispose(bool disposing)
     {
