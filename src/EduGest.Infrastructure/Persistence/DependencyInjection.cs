@@ -17,8 +17,7 @@ public static class DependencyInjection
 
         services.AddIdentityCore<ApplicationUser>()
             .AddRoles<ApplicationRole>()
-            .AddEntityFrameworkStores<EduGestDbContext>()
-            .AddDefaultTokenProviders();
+            .AddEntityFrameworkStores<EduGestDbContext>();
 
         return services;
     }
