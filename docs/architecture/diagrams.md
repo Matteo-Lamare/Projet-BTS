@@ -6,7 +6,7 @@ Ces diagrammes décrivent la cible actuelle. Ils devront évoluer si l'implémen
 
 ```mermaid
 flowchart LR
-    WPF[R1 - Client WPF] -->|HTTPS / JSON| API[ASP.NET Core Web API]
+    Avalonia[R1 - Client Avalonia] -->|HTTPS / JSON| API[ASP.NET Core Web API]
     WEB[R2 - Navigateur Web] -->|HTTPS / JSON| API
     API --> APP[Application / logique]
     APP --> INFRA[Infrastructure]
