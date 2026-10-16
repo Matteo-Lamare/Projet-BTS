@@ -4,7 +4,7 @@
 Architecture cible à adapter à l'environnement réel.
 
 ## Flux
-Client WPF ou navigateur -> HTTPS/Nginx -> ASP.NET Core API -> PostgreSQL.
+Client Avalonia ou navigateur -> HTTPS/Nginx -> ASP.NET Core API -> PostgreSQL.
 
 ## Environnements
 DEV : développement ; TEST : validation ; PROD : livraison/démonstration. Configurations et secrets séparés.
