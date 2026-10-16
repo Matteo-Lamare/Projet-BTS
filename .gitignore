@@ -24,3 +24,6 @@ desktop-admin/**/obj/
 *.log
 .DS_Store
 Thumbs.db
+
+# Suivi local Codex
+SUIVI_PROJET.md
