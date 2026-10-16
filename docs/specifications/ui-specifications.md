@@ -20,7 +20,7 @@ La connexion ne demande **jamais de choisir un rôle**. L'utilisateur fournit se
 
 Le formulaire reste simple : identifiant/e-mail, mot de passe, bouton de connexion, erreur et chargement. Affichage/masquage du mot de passe possible. « Se souvenir de moi » et récupération de mot de passe ne seront conservés que si leur comportement est réellement implémenté.
 
-## R1 — WPF
+## R1 — Avalonia
 
 ### Tableau de bord
 Navigation adaptée au compte connecté. Pour le professeur, priorité au planning, prochain cours/appel et actions à traiter. Pour l'administration/administrateur, priorité aux informations de gestion utiles.
