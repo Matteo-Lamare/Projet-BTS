@@ -6,13 +6,13 @@ Ce dépôt contient la documentation, puis le code source, d'une application de 
 
 Proposer deux interfaces complémentaires s'appuyant sur une API et une base de données communes :
 
-- **R1 — application lourde WPF** : administration et enseignants, avec gestion des référentiels, notes et absences ;
+- **R1 — application lourde Avalonia** : administration et enseignants, avec gestion des référentiels, notes et absences ;
 - **R2 — application web responsive** : élèves, parents et enseignants, avec consultation, documents, emploi du temps et messagerie temps réel.
 
 ## Architecture retenue
 
-- WPF / C# / MVVM pour R1 ;
-- HTML / Tailwind CSS / JavaScript vanilla pour R2 ;
+- Avalonia UI / C# / MVVM pour R1 ;
+- React / TypeScript / Vite / Tailwind CSS pour R2 ;
 - ASP.NET Core Web API pour le backend ;
 - SignalR pour la messagerie temps réel ;
 - PostgreSQL + Entity Framework Core pour les données ;
@@ -58,6 +58,8 @@ Les applications clientes ne communiquent jamais directement avec PostgreSQL : t
 - [Gabarit guide R1](docs/user-guides/r1-guide-template.md)
 - [Gabarit guide R2](docs/user-guides/r2-guide-template.md)
 - [Revue de cohérence documentaire](docs/documentation-review.md)
+- [Architecture technique validée](ARCHITECTURE.md)
+- [Suivi du projet](SUIVI_PROJET.md)
 
 ## Structure cible
 
