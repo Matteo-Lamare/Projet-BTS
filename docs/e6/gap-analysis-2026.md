@@ -3,7 +3,7 @@
 ## Synthèse
 
 ### Points déjà bien cadrés
-- deux réalisations distinctes R1 WPF et R2 Web ;
+- deux réalisations distinctes R1 Avalonia et R2 Web ;
 - API/service Web partagé ;
 - PostgreSQL/EF Core ;
 - authentification et habilitations ;
@@ -21,7 +21,7 @@
 - deux solutions applicatives opérationnelles du contexte à valider avec l'établissement.
 
 **P0 — deux réalisations opérationnelles**
-R1 WPF et R2 Web ne doivent pas rester des descriptions/squelettes. Les deux réalisations sont nécessaires à l'épreuve.
+R1 Avalonia et R2 Web ne doivent pas rester des descriptions/squelettes. Les deux réalisations sont nécessaires à l'épreuve.
 
 **P0 — maintenance corrective/évolutive**
 Il faut conserver une vraie évolution ou correction : besoin/version initiale, diagnostic ou analyse, code modifié, tests, non-régression et documentation mise à jour.
