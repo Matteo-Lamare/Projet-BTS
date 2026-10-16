@@ -1,17 +1,26 @@
-# Build
+# Environnements et secrets
+.env
+.env.*
+!.env.example
+secrets.json
+
+# .NET
 bin/
 obj/
 .vs/
-
-# IDE
-.idea/
-
-# Secrets
-appsettings.*.json
-!appsettings.json
-*.pfx
-*.key
-
-# User-specific
 *.user
 *.suo
+
+# Node.js et React
+node_modules/
+dist/
+coverage/
+
+# Avalonia
+desktop-admin/**/bin/
+desktop-admin/**/obj/
+
+# Journaux et systèmes
+*.log
+.DS_Store
+Thumbs.db
