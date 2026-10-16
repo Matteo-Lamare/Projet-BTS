@@ -14,7 +14,7 @@ Domain / Application / Infrastructure / API : séparation claire, testabilité e
 
 ## Clients
 
-R1 utilise WPF + MVVM pour une interface desktop riche. R2 utilise HTML + Tailwind CSS + JavaScript vanilla : aucun framework JavaScript n'est ajouté, mais Tailwind fournit le système de styles responsive.
+R1 utilise Avalonia UI + MVVM pour une interface desktop riche. R2 utilise React + TypeScript + Vite + Tailwind CSS : aucun framework JavaScript n'est ajouté, mais Tailwind fournit le système de styles responsive.
 
 ## Sécurité
 
@@ -64,4 +64,4 @@ Conséquence : le `DbContext` d'Infrastructure sera basé sur `IdentityDbContext
 
 ## ADR-13 — Tailwind CSS pour le client Web R2
 
-R2 utilise HTML, Tailwind CSS et JavaScript vanilla. Tailwind est compilé localement avec Node.js/npm via le CLI officiel ; le CSS produit est un fichier statique servi au navigateur. Le Play CDN n'est pas utilisé en production. Cette décision conserve un front-end simple et explicable tout en accélérant la réalisation d'une interface responsive et cohérente.
+R2 utilise React, TypeScript, Vite et Tailwind CSS. Tailwind est compilé localement avec Node.js/npm via le CLI officiel ; le CSS produit est un fichier statique servi au navigateur. Le Play CDN n'est pas utilisé en production. Cette décision conserve un front-end simple et explicable tout en accélérant la réalisation d'une interface responsive et cohérente.
