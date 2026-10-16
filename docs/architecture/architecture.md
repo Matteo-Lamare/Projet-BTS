@@ -2,7 +2,7 @@
 
 ## Vue générale
 
-WPF (R1) et Web (R2) consomment la même API ASP.NET Core, qui est la seule porte d'accès à PostgreSQL. L'API gère aussi le stockage des fichiers et SignalR.
+Avalonia (R1) et Web (R2) consomment la même API ASP.NET Core, qui est la seule porte d'accès à PostgreSQL. L'API gère aussi le stockage des fichiers et SignalR.
 
 ## Solution .NET
 
@@ -10,8 +10,8 @@ WPF (R1) et Web (R2) consomment la même API ASP.NET Core, qui est la seule port
 - EduGest.Application : cas d'utilisation, services, DTO, validations et interfaces.
 - EduGest.Infrastructure : EF Core, PostgreSQL, Identity, fichiers et journalisation.
 - EduGest.Api : contrôleurs REST, authentification, autorisation, middleware et SignalR.
-- EduGest.Desktop : client WPF en MVVM.
-- EduGest.Web : client HTML + Tailwind CSS + JavaScript vanilla. Tailwind est compilé lors du build front ; aucun runtime Tailwind ni CDN n'est requis en production.
+- EduGest.Desktop : client Avalonia en MVVM.
+- EduGest.Web : client React + TypeScript + Vite + Tailwind CSS. React est compilé par Vite ; les dépendances sont regroupées lors du build de production.
 - Tests : xUnit unitaires et intégration API.
 
 Flux : Client → Controller → Application Service → Infrastructure/EF Core → PostgreSQL.
