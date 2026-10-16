@@ -9,8 +9,8 @@ Cette procédure sera finalisée lorsque R1, R2 et le déploiement seront stabil
 - Git ;
 - SDK .NET 8 ;
 - PostgreSQL pour l'environnement réel de développement ;
-- Node.js/npm uniquement pour construire les ressources Tailwind de R2 ;
-- IDE compatible .NET/WPF.
+- Node.js/npm pour installer les dépendances et construire R2 ;
+- IDE compatible .NET/Avalonia.
 
 Les versions exactes utilisées pour l'épreuve devront être consignées avant la livraison.
 
@@ -32,7 +32,7 @@ Les migrations EF Core sont la source de vérité. La commande exacte et le scé
 
 La procédure finale devra préciser : commande de lancement, URL/port, environnement, vérification de santé ou requête de contrôle et compte de démonstration.
 
-## R1 WPF
+## R1 Avalonia
 
 À compléter lorsque l'interface aura été développée : build, lancement, configuration de l'URL API et prérequis du poste.
 
