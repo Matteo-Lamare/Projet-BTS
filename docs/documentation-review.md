@@ -16,7 +16,7 @@ En cas d'écart pendant le développement :
 ## Points vérifiés
 
 ### R1/R2
-R1 reste WPF administration/professeurs. R2 reste Web responsive élèves/parents/professeurs. Même API, aucune connexion directe des clients à PostgreSQL.
+R1 reste Avalonia administration/professeurs. R2 reste Web responsive élèves/parents/professeurs. Même API, aucune connexion directe des clients à PostgreSQL.
 
 ### Authentification
 Identity est la source des comptes/rôles techniques. JWT + refresh token pour les clients. Permissions métier séparées. Connexion commune : aucun choix manuel de rôle.
