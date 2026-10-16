@@ -59,7 +59,6 @@ Les applications clientes ne communiquent jamais directement avec PostgreSQL : t
 - [Gabarit guide R2](docs/user-guides/r2-guide-template.md)
 - [Revue de cohérence documentaire](docs/documentation-review.md)
 - [Architecture technique validée](ARCHITECTURE.md)
-- [Suivi du projet](SUIVI_PROJET.md)
 
 ## Structure cible
 
