@@ -6,4 +6,4 @@ EF Core est la source d'évolution du schéma de développement.
 - `EduGestDbContext` centralise l'accès aux données.
 - Les migrations EF Core seront versionnées dans le dépôt.
 - `database/schema.sql` reste une représentation documentaire/démonstrative.
-- Aucun client (WPF ou Web) n'accède directement à PostgreSQL.
+- Aucun client (Avalonia ou Web) n'accède directement à PostgreSQL.
