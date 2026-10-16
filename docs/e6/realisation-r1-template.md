@@ -4,7 +4,7 @@
 
 ## Identification
 - Intitulé : EduGest Desktop
-- Type : application lourde WPF
+- Type : application lourde Avalonia
 - Public : administration et professeurs
 - Version/commit présenté :
 - Dates de réalisation :
