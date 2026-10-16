@@ -48,3 +48,7 @@ Le client lourd doit être installable pour l'administration. Avalonia permet de
 ### Prochaine étape
 
 Installer les dépendances, vérifier que l'API, le client React et le client Avalonia démarrent, puis mettre en place l'authentification de bout en bout.
+
+### Note technique
+
+Le projet desktop inclut aussi les polices et les diagnostics Avalonia nécessaires au démarrage prévu par le modèle Avalonia.
