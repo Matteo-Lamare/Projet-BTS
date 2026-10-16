@@ -6,7 +6,7 @@ Cette matrice reprend les intitulés de sous-compétences de la grille d'aide à
 
 ## Réalisations support
 
-- **R1 — EduGest Desktop** : client lourd WPF, orienté administration/professeurs.
+- **R1 — EduGest Desktop** : client lourd Avalonia, orienté administration/professeurs.
 - **R2 — EduGest Web** : application Web responsive, orientée élèves/parents/professeurs.
 
 Les deux réalisations doivent, ensemble, couvrir toutes les compétences du bloc 2. Une réalisation absente entraîne 10 points de pénalité ; l'absence des deux entraîne 20 points. Un environnement technologique non conforme peut entraîner jusqu'à 15 points de pénalité.
@@ -18,7 +18,7 @@ Les deux réalisations doivent, ensemble, couvrir toutes les compétences du blo
 | Analyser un besoin exprimé et son contexte juridique | R1 + R2 | cahier des charges, acteurs, données personnelles, règles d'accès |
 | Participer à la conception de l'architecture d'une solution applicative | R1 + R2 | architecture, décisions techniques, flux clients/API/BDD |
 | Modéliser une solution applicative | R1 + R2 | MCD, MLD, modèle EF, diagrammes utiles |
-| Exploiter les ressources du cadre applicatif (framework) | R1 + R2 | .NET/ASP.NET Core/EF Core ; WPF pour R1 |
+| Exploiter les ressources du cadre applicatif (framework) | R1 + R2 | .NET/ASP.NET Core/EF Core ; Avalonia pour R1 |
 | Identifier, développer, utiliser ou adapter des composants logiciels | R1 + R2 | composants/services réellement utilisés et expliqués |
 | Exploiter les technologies Web pour mettre en œuvre les échanges entre applications, y compris de mobilité | R1 + R2 | API REST, JWT ; R2 responsive ; SignalR si réalisé |
 | Utiliser des composants d'accès aux données | R1 + R2 | EF Core/PostgreSQL, requêtes et migrations |
