@@ -31,12 +31,12 @@ Ces éléments ne doivent pas être attribués à EduGest sans preuve. Ils doive
 
 | Exigence | Réponse visée | État |
 | --- | --- | --- |
-| Un ou deux environnements de développement avec outils de tests, framework et au moins deux langages | .NET/ASP.NET Core/WPF + C# ; Web + JavaScript | À démontrer sur l'environnement réel |
+| Un ou deux environnements de développement avec outils de tests, framework et au moins deux langages | .NET/ASP.NET Core/Avalonia + C# ; React + TypeScript | À démontrer sur l'environnement réel |
 | Bibliothèque de composants logiciels | NuGet/.NET et composants du projet | À documenter |
 | SGBD avec langage de programmation associé | PostgreSQL ; modalités exactes à préciser avec le centre | À confirmer |
 | Gestion de versions et suivi de problèmes logiciels | GitHub | Versionnement utilisé ; suivi de problèmes à organiser si retenu |
 | Solution pour tester les comportements anormaux | xUnit/tests API et outils du centre | Commencé |
-| Code sur accès fixe de type client lourd | R1 WPF | À réaliser |
+| Code sur accès fixe de type client lourd | R1 Avalonia | À réaliser |
 | Code dans un navigateur Web | R2 | Squelette seulement |
 | Code sur OS d'une solution d'accès mobile | à distinguer du simple responsive Web | **À clarifier avec l'établissement** |
 | Code sur OS d'un serveur | API ASP.NET Core | Socle préparé |
