@@ -1,1 +1,33 @@
-@import "tailwindcss";
+:root {
+  color: #172033;
+  background: #f4f7fb;
+  font-family: Inter, system-ui, sans-serif;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+main {
+  width: min(100% - 2rem, 68rem);
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+.card {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 0.5rem 1.5rem rgb(25 45 75 / 10%);
+}
+
+.status {
+  color: #176b3a;
+  font-weight: 600;
+}
