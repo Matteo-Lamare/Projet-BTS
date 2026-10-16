@@ -5,7 +5,7 @@
 EduGest est une solution de gestion scolaire réalisée dans le cadre du BTS SIO option SLAM. Le besoin est de centraliser les informations utiles à la scolarité tout en proposant des interfaces adaptées aux différents profils.
 
 Le projet comprend deux réalisations :
-- R1 : application lourde WPF pour l'administration et les professeurs ;
+- R1 : application lourde Avalonia pour l'administration et les professeurs ;
 - R2 : application Web responsive pour les élèves, parents et professeurs.
 
 Les deux réalisations consomment une API commune et partagent les mêmes données.
@@ -55,8 +55,8 @@ Authentification/profil, tableau de bord, notes, absences/retards, documents, em
 ## 6. Contraintes techniques retenues
 
 - C#/.NET ;
-- WPF pour R1 ;
-- HTML, Tailwind CSS et JavaScript vanilla pour R2 ;
+- Avalonia pour R1 ;
+- React, TypeScript, Vite et Tailwind CSS pour R2 ;
 - ASP.NET Core Web API ;
 - PostgreSQL et Entity Framework Core ;
 - ASP.NET Core Identity, JWT et refresh tokens ;
