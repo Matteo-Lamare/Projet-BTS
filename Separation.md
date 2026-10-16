@@ -4,7 +4,7 @@
 
 Les deux applications utilisent la même API et la même base de données. L'API est la seule frontière d'accès aux données et applique toutes les règles métier et d'autorisation.
 
-## R1 — application lourde WPF
+## R1 — application lourde Avalonia
 
 Public principal : administration et professeurs.
 
