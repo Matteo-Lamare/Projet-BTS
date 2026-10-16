@@ -1,7 +1,7 @@
 # Checklist finale E6 — EduGest
 
 ## Réalisations
-- [ ] R1 WPF opérationnelle et maîtrisée
+- [ ] R1 Avalonia opérationnelle et maîtrisée
 - [ ] R2 Web opérationnelle et maîtrisée
 - [ ] versions/commits présentés identifiés
 - [ ] données de démonstration fictives/anonymisées
