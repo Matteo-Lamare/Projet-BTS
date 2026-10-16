@@ -1,21 +1,17 @@
 # EduGest Web
 
-Client web responsive de la réalisation R2.
+Application légère React destinée aux élèves et aux professeurs.
 
-## Stack
+## Prérequis
 
-- HTML sémantique ;
-- Tailwind CSS ;
-- JavaScript vanilla ;
-- API REST EduGest pour les données ;
-- SignalR uniquement pour la messagerie temps réel.
+- Node.js LTS ;
+- npm.
 
-Tailwind est installé avec npm et compilé avec le CLI officiel. Le Play CDN n'est pas utilisé en production.
+## Démarrage
 
-## Commandes prévues
+```bash
+npm install
+npm run dev
+```
 
-`npm install` installe les dépendances du front.
-
-`npm run dev` surveille les sources et régénère le CSS pendant le développement.
-
-`npm run build` génère le CSS minifié destiné au déploiement.
+L'application utilise React, TypeScript, Vite, React Router et TanStack Query. Les appels métier vers l'API seront ajoutés progressivement ; aucun accès direct à PostgreSQL n'est autorisé.
