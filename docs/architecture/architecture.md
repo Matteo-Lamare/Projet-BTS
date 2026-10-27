@@ -11,7 +11,7 @@ Avalonia (R1) et Web (R2) consomment la même API ASP.NET Core, qui est la seule
 - EduGest.Infrastructure : EF Core, PostgreSQL, Identity, fichiers et journalisation.
 - EduGest.Api : contrôleurs REST, authentification, autorisation, middleware et SignalR.
 - EduGest.Desktop : client Avalonia en MVVM.
-- EduGest.Web : client React + TypeScript + Vite + Tailwind CSS. React est compilé par Vite ; les dépendances sont regroupées lors du build de production.
+- EduGest.Web : client Vue.js 3 + TypeScript + Vite + Tailwind CSS. Vue est compilé par Vite ; les dépendances sont regroupées lors du build de production.
 - Tests : xUnit unitaires et intégration API.
 
 Flux : Client → Controller → Application Service → Infrastructure/EF Core → PostgreSQL.
