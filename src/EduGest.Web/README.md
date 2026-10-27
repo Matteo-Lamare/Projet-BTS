@@ -1,11 +1,6 @@
 # EduGest Web
 
-Application légère React destinée aux élèves et aux professeurs.
-
-## Prérequis
-
-- Node.js LTS ;
-- npm.
+Client R2 Vue.js 3, TypeScript et Vite pour élèves, parents et professeurs.
 
 ## Démarrage
 
@@ -14,4 +9,11 @@ npm install
 npm run dev
 ```
 
-L'application utilise React, TypeScript, Vite, React Router et TanStack Query. Les appels métier vers l'API seront ajoutés progressivement ; aucun accès direct à PostgreSQL n'est autorisé.
+## Compilation
+
+```bash
+npm run build
+npm run preview
+```
+
+Le point d'entrée est `src/main.ts` et le composant racine `src/App.vue`. Vue Router, Pinia et Tailwind CSS seront intégrés selon les fonctionnalités à réaliser. Les appels API et contrôles de navigation ne sont pas encore implémentés. Les permissions et restrictions métier devront être vérifiées par l'API.
