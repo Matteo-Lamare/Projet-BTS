@@ -56,7 +56,7 @@ Authentification/profil, tableau de bord, notes, absences/retards, documents, em
 
 - C#/.NET ;
 - Avalonia pour R1 ;
-- React, TypeScript, Vite et Tailwind CSS pour R2 ;
+- Vue.js 3, TypeScript, Vite et Tailwind CSS pour R2 ;
 - ASP.NET Core Web API ;
 - PostgreSQL et Entity Framework Core ;
 - ASP.NET Core Identity, JWT et refresh tokens ;
