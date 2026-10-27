@@ -38,7 +38,7 @@ La procédure finale devra préciser : commande de lancement, URL/port, environn
 
 ## R2 Web
 
-À compléter après les essais de maquettes et l'implémentation : installation npm, compilation Tailwind, fichiers servis et URL d'accès.
+Socle Vue.js 3 + TypeScript + Vite : depuis `src/EduGest.Web`, lancer `npm install`, puis `npm run dev` ou `npm run build`. Tailwind et le déploiement final restent à intégrer et à vérifier.
 
 ## Critère de fin
 
