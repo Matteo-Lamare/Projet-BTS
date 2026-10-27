@@ -7,7 +7,7 @@
 | API | ASP.NET Core 10 avec C# |
 | Accès aux données | Entity Framework Core 10 avec le fournisseur Npgsql |
 | Base de données | PostgreSQL |
-| Application légère | React 19, TypeScript et Vite |
+| Application légère | Vue.js 3, TypeScript et Vite |
 | Application lourde | Avalonia UI avec C# et le patron MVVM |
 | Communication temps réel | SignalR |
 | Contrôle des accès | ASP.NET Core Identity, JWT et permissions applicatives |
@@ -19,9 +19,9 @@
 
 ```text
 Projet-BTS/
-├── backend/             API ASP.NET Core
-├── frontend-light/      Application React des élèves et professeurs
-├── desktop-admin/       Application Avalonia de l'administration
+├── src/EduGest.Api/       API ASP.NET Core
+├── src/EduGest.Web/       Application Vue des élèves, parents et professeurs
+├── src/EduGest.Desktop/   Application Avalonia de l'administration
 ├── database/             Schéma SQL et futures migrations
 ├── docs/                 Documentation technique complémentaire
 ├── MCD.md                Modèle conceptuel de données
@@ -48,7 +48,7 @@ Les modules prévus sont :
 
 ### Application légère
 
-L'application React est une interface web responsive destinée aux élèves et professeurs. Elle ne contient aucune règle de sécurité critique : les autorisations sont toujours vérifiées par l'API.
+L'application Vue est une interface web responsive destinée aux élèves, parents et professeurs. Elle ne contient aucune règle de sécurité critique : les autorisations sont toujours vérifiées par l'API.
 
 ### Application lourde
 
@@ -59,7 +59,7 @@ L'application Avalonia est installable et destinée à l'administration. Le patr
 | Projet | Dépendances principales |
 | --- | --- |
 | API | ASP.NET Core Identity, Entity Framework Core, Npgsql, SignalR, FluentValidation, OpenAPI, Serilog |
-| Web | React Router, TanStack Query, React Hook Form, Zod, Tailwind CSS, shadcn/ui |
+| Web | Vue Router, Pinia, Tailwind CSS (selon besoins) |
 | Bureau | Avalonia, CommunityToolkit.Mvvm, Microsoft.Extensions.DependencyInjection, Refit ou HttpClientFactory |
 | Tests | xUnit, FluentAssertions, Testcontainers, Playwright |
 | Infrastructure | PostgreSQL, Docker Compose, GitHub Actions |
