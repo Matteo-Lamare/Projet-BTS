@@ -12,7 +12,7 @@ Proposer deux interfaces complémentaires s'appuyant sur une API et une base de 
 ## Architecture retenue
 
 - Avalonia UI / C# / MVVM pour R1 ;
-- React / TypeScript / Vite / Tailwind CSS pour R2 ;
+- Vue 3 / TypeScript / Vite pour R2 ;
 - ASP.NET Core Web API pour le backend ;
 - SignalR pour la messagerie temps réel ;
 - PostgreSQL + Entity Framework Core pour les données ;
