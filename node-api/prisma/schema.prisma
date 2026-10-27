@@ -1,0 +1,11 @@
+// Première étape : introspection de la base existante générée par EF Core.
+// Configurer DATABASE_URL et exécuter `npm run db:introspect`.
+// Ne PAS lancer prisma migrate dev / db push sur une base existante.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
